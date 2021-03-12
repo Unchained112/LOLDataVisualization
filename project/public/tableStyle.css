@@ -1,0 +1,60 @@
+#scrolltable {
+    height: calc(100% - 32.8px);
+    overflow-y: scroll;
+}
+
+.tableDiv {
+    grid-row: 2;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.pageWrapper {
+    display: grid;
+    grid-template-rows: 520.8px calc(100vh - 520.8px);
+}
+
+.Player {
+    width: 100px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+.Team {
+    width: 150px;
+}
+
+.Pos {
+    width: 70px;
+}
+
+.numberCol {
+    width: 40px;
+}
+
+.yoyo .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+
+  .yoyo {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .yoyo:hover .tooltiptext {
+    visibility: visible;
+  }
+

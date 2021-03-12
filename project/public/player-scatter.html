@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parallel coordinates</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <link href="style.css" rel='stylesheet'>
+  <link href="tableStyle.css" rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="header.css">
+    
+  <!-- D3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+  <div class="pageWrapper">
+    <div class="page">
+      <header>
+        <ul>
+          <li style="float: left;"><p class="ttlLogo">TopTeamsLeague</p></li>
+          
+          <li><a href="./topTeamsLeagueChampion.html">Champions</a></li>
+          <li><a href="./topTeamsLeagueTeam.html">Teams</a></li>
+          <li class="header-dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Players</a>
+            <div class="header-dropdown-content">
+              <a href="radarchart/radarchart.html">Radarchart</a>
+              <a href="player-scatter.html">Parallel coordinates</a>
+            </div>
+          </li>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </header>
+    </div>
+    <div class="tableDiv">
+      
+      <table class="table table-striped table-bordered table-sm table-fixed"">
+        <thead>
+          <tr>															
+            <th class="Player">Player</th>
+            <th class="Team">Team</th>
+            <th class="Pos">Position</th>
+            <th class="numberCol"><div class="yoyo">GP<span class="tooltiptext">Games played</span></div></th>
+            <th class="numberCol"><div class="yoyo">W%<span class="tooltiptext">Win rate</span></div></th>
+            <th class="numberCol"><div class="yoyo">CTR%<span class="tooltiptext">Counter-pick rate</span></div></th>
+            <th class="numberCol"><div class="yoyo">K<span class="tooltiptext">Total kills</span></div></th>
+            <th class="numberCol"><div class="yoyo">D<span class="tooltiptext">Total deats</span></div></th>
+            <th class="numberCol"><div class="yoyo">A<span class="tooltiptext">Total assists</span></div></th>
+            <th class="numberCol"><div class="yoyo">KDA<span class="tooltiptext">Total Kill/Death/Assist ratio</span></div></th>
+            <th class="numberCol"><div class="yoyo">KP%<span class="tooltiptext">Kill participation (%)</span></div></th>
+            <th class="numberCol"><div class="yoyo">KS%<span class="tooltiptext">Kill share (%)</span></div></th>
+            <th class="numberCol"><div class="yoyo">DTH%<span class="tooltiptext">Avg share of team deaths (%)</span></div></th>
+            <th class="numberCol"><div class="yoyo">FB%<span class="tooltiptext">First blood rate (%)</span></div></th>
+            <th class="numberCol"><div class="yoyo">GD10<span class="tooltiptext">Avg gold difference at 10 min</span></div></th>
+            <th class="numberCol"><div class="yoyo">XPD10<span class="tooltiptext">Avg xp difference at 10 min</span></div></th>
+            <th class="numberCol"><div class="yoyo">CSD10<span class="tooltiptext">Avg creep score difference at 10 min</span></div></th>
+            <th class="numberCol"><div class="yoyo">CSPM<span class="tooltiptext">Avg monsters + minions killed per min</span></div></th>
+            <th class="numberCol"><div class="yoyo">CS%P15<span class="tooltiptext">Avg share of team's total creep score after 15 min</span></div></th>
+            <th class="numberCol"><div class="yoyo">DPM<span class="tooltiptext">Avg damage to champions per min (%)</span></div></th>
+            <th class="numberCol"><div class="yoyo">DMG%<span class="tooltiptext">Damage share</span></div></th>
+            <th class="numberCol"><div class="yoyo">EGPM<span class="tooltiptext">Avg earned gold per min</span></div></th>
+            <th class="numberCol"><div class="yoyo">GOLD%<span class="tooltiptext">Gold share (%)</span></div></th>
+            <th class="numberCol"><div class="yoyo">WPM<span class="tooltiptext">Avg wards placed per min</span></div></th>
+            <th class="numberCol"><div class="yoyo">WCPM<span class="tooltiptext">Avg wards cleared per min</span></div></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <template id="tableRowTemplate">
+    <tr>
+      <td class="Player"></td>
+      <td class="Team"></td>
+      <td class="Pos"></td>
+      <td class="GP numberCol"></td>
+      <td class="W numberCol"></td>
+      <td class="CTR numberCol"></td>
+      <td class="K numberCol"></td>
+      <td class="D numberCol"></td>
+      <td class="A numberCol"></td>
+      <td class="KDA numberCol"></td>
+      <td class="KP numberCol"></td>
+      <td class="KS numberCol"></td>
+      <td class="DTH numberCol"></td>
+      <td class="FB numberCol"></td>
+      <td class="GD10 numberCol"></td>
+      <td class="XPD10 numberCol"></td>
+      <td class="CSD10 numberCol"></td>
+      <td class="CSPM numberCol"></td>
+      <td class="CSP15 numberCol"></td>
+      <td class="DPM numberCol"></td>
+      <td class="DMG numberCol"></td>
+      <td class="EGPM numberCol"></td>
+      <td class="GOLD numberCol"></td>
+      <td class="WPM numberCol"></td>
+      <td class="WCPM numberCol"></td>
+    </tr>
+  </template>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
+  <script src="parcoords.js"></script>
+</body>
+</html>

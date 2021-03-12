@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Player stats</title>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.7/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
+    <!--
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <link href="style.css" rel='stylesheet'>
+    <link rel="stylesheet" href="../header.css">
+    <script type="text/javascript" src="radarChart.js"></script>
+    <script type="text/javascript" src="teamRadarChart.js"></script>
+    <script type="text/javascript" src="visualization.js"></script>
+    <!-- <script type="text/javascript" src="teamBarChart.js"></script> -->
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/dist/echarts.min.js"></script> -->
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    
+    <div class="pageContent">
+        <header id="header">
+            <ul>
+              <li style="float: left;"><p class="ttlLogo">TopTeamsLeague</p></li>
+              
+              <li><a href="../topTeamsLeagueChampion.html">Champions</a></li>
+              <li><a href="../topTeamsLeagueTeam.html">Teams</a></li>
+              <li class="header-dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Players</a>
+                <div class="header-dropdown-content">
+                  <a href="radarchart.html">Radarchart</a>
+                  <a href="../player-scatter.html">Parallel coordinates</a>
+                </div>
+              </li>
+              <li><a href="../index.html">Home</a></li>
+            </ul>
+          </header>
+        
+        <div id="headlineRow">
+            <h4 id="headline1">Players</h4>
+            <h4 id="headline2">Selected</h4>
+            <div id="filterRow">
+                <div id="textColumn">
+                    <h6 style="align-self: flex-end;">Filter: </h6>
+                    <h6 id="resetButton" onclick="resetFilters()">Reset</h6>
+                </div>
+                <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="teamSelect" onchange="filterPlayers('team', this.value)">
+                    <option value="team" disabled selected hidden>Team</option>
+                </select>
+                <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="roleSelect" onchange="filterPlayers('role', this.value)">
+                    <option value="role" disabled selected hidden>Role</option>
+                </select>
+                <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="sortBySelect" onchange="filterPlayers('sortBy', this.value)">
+                    <option value="sortby" disabled selected hidden>Sort by</option>
+                    <option value="alphabetically">Alphabetically</option>
+                    <option value="Highest kill participation">Highest kill participation</option>
+                    <option value="Most damage">Most damage</option>
+                    <option value="Highest winrate">Highest winrate</option>
+                    <option value="Highest FB">Highest First Blood rate</option>
+                    <option value="Highest GS">Highest Gold share</option>
+                    <option value="Highest ASD">Highest avg share of deaths</option>
+                </select>
+            </div>
+        </div>
+        <div class="row playerForm">
+            <div id="playerSelect">
+
+            </div>
+            <!-- <div class="col-8 p-0">
+                <select class="form-select form-select-sm"  id="playerSelect">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-4 p-0">
+                <button class="btn btn-sm btn-primary" onclick="updatePlayer()">Search</button>
+            </div> -->
+        </div>
+        
+        
+        <div id="playerProfiles">
+            <template id="playerCardTemplate">
+                <div class="card mb-1 playerCard" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                        <img src="default_profile.jpg" class="profilePicture">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="delete">×</p>
+                            <h6 class="card-title playerName">Player Name</h6>
+                            <span class="playerTeam">Player Team</span> </br>
+                            <span class="playerPos"><small>Player Pos</small></span>
+                            <div class="playerColour">
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div id="radarChart"></div>
+    </div>
+    
+    <!-- <div id="main" style="width: 600px;height:400px;"></div> -->
+
+    <!-- <script type="text/javascript" src="echarts.js"></script> -->
+    <script type="text/javascript" src="radarChart.js"></script>
+    <script type="text/javascript" src="teamRadarChart.js"></script>
+    <script type="text/javascript" src="visualization.js"></script>
+    <!-- <script type="text/javascript" src="teamBarChart.js"></script> -->
+</body>
+</html>

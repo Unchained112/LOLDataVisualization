@@ -1,0 +1,85 @@
+* {box-sizing: border-box;}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  height: 100%;
+
+}
+header {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: #396C90;
+}
+
+.ttlLogo {
+    color: transparent;
+    -webkit-text-fill-color: #F0BB00;/*文字的填充色*/
+    -webkit-text-stroke: 0.5px #604D1C;
+    text-shadow: 2px 2px 4px #000000;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 5px 16px;
+    text-align: center;
+    margin: 0;
+  }
+@media screen and (max-width: 600px) {
+  .ttlLogo {
+      float: top;
+  }
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #396C90;
+}
+
+li {
+  float: right;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(147, 194, 255);
+}
+
+li.header-dropdown {
+  display: inline-block;
+}
+
+.header-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.header-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.header-dropdown-content a:hover {background-color: #f1f1f1;}
+
+.header-dropdown:hover .header-dropdown-content {
+  display: block;
+}
