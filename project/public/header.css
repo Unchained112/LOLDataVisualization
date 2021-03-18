@@ -27,13 +27,16 @@ header {
     text-align: center;
     margin: 0;
   }
+  .ttlLogo:hover {
+    cursor: pointer;
+  }
 @media screen and (max-width: 600px) {
   .ttlLogo {
       float: top;
   }
 }
 
-ul {
+.headerUl {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -41,7 +44,7 @@ ul {
   background-color: #396C90;
 }
 
-li {
+.headerUl li {
   float: right;
 }
 
@@ -53,11 +56,10 @@ li a, .dropbtn {
   text-decoration: none;
 }
 
-li a:hover, .dropdown:hover .dropbtn {
+.headerUl li a:hover, .dropdown:hover .dropbtn {
   background-color: rgb(147, 194, 255);
 }
-
-li.header-dropdown {
+.headerUl li.header-dropdown {
   display: inline-block;
 }
 

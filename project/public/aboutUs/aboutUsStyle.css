@@ -1,0 +1,54 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  fill: #242424;
+  text-align: center;
+  /* text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; */
+  cursor: default;
+}
+#header {
+  grid-row: 1;
+  background-color: #416c8a;
+  grid-column-start: 1;
+  grid-column-end: -1;
+}
+#ttl {
+  grid-column: 1;
+  margin-left: 10px;
+  align-self: flex-end;
+  color: #cba54e;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.pageContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-rows: 50px 50px calc(100vh - 100px);
+}
+.aboutUsImage {
+  object-fit: scale-down;
+  height: 200px;
+  object-position: 0 -10%;
+}
+
+.aboutUsCard {
+  width: 170px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.imageCropper {
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.infoUl {
+  list-style-type:none;
+  text-align: center;
+  padding: 0;
+}

@@ -45,13 +45,14 @@ d3.csv("../player-stats.csv", function(data) { // loop through the excel documen
     for (let i =0; i<data.length; i++) {
         let playerName = document.createElement("p");
         playerName.innerHTML = data[i].Player
-        playerName.className = "playerName"
+        playerName.className = "playerListName"
         playerName.id = i
         playerName.onclick = function() { selectplayer(parseInt(playerName.id)) };
         playerSelect.appendChild(playerName)
         data[i].id = i;
         data[i].teamFilter = true;
         data[i].roleFilter = true;
+        data[i].playerColour = getRandomColor()
         if (!roles.includes(data[i].Pos)) {
             roles.push(data[i].Pos)
         }
@@ -87,9 +88,8 @@ function selectplayer(id) { // When a player is selected from the list, a card i
         }
     }
     var temp = document.getElementById("playerCardTemplate");
-    let playerColour = getRandomColor()
+    let playerColour = playerInfoArray[id].playerColour
     var clon = temp.content.cloneNode(true);
-    playerInfoArray[id].playerColour = playerColour
     clon.querySelector(".playerCard").id = "player_" + id
     clon.querySelector(".profilePicture").src = "PlayerImage/" + playerInfoArray[id].Player.replace(/ /g,"_") + ".png"
     clon.querySelector(".playerName").textContent = playerInfoArray[id].Player
@@ -167,35 +167,40 @@ function resetFilters() {
 }
 
 function filterPlayers(filterType, filterBy) {
-    if (filterBy === ("sortby" || "team" || "role")){
-        return
-    }
     if (filterType === "team") {
         activeFilters.teamFilter = true
         playerInfoArray.filter(player => {
-            if (!(player.Team.toLowerCase() === filterBy.toLowerCase())) {
-                player.teamFilter = false
-            }
-            else {
+            if (filterBy === "team") {
                 player.teamFilter = true
+            } else {
+                if (!(player.Team.toLowerCase() === filterBy.toLowerCase())) {
+                    player.teamFilter = false
+                }
+                else {
+                    player.teamFilter = true
+                }
             }
             document.getElementById(player.id).style.display = (player.roleFilter && player.teamFilter ? 'block' : 'none')
         })
     } else if (filterType === "role") {
         activeFilters.roleFilter = true
         playerInfoArray.filter(player => {
-            if (!(player.Pos.toLowerCase() === filterBy.toLowerCase())) {
-                player.roleFilter = false
-            }
-            else {
+            if (filterBy === "role") {
                 player.roleFilter = true
+            } else {
+                if (!(player.Pos.toLowerCase() === filterBy.toLowerCase())) {
+                    player.roleFilter = false
+                }
+                else {
+                    player.roleFilter = true
+                }
             }
             document.getElementById(player.id).style.display = (player.roleFilter && player.teamFilter ? 'block' : 'none')
         })
     } else if (filterType === "sortBy") {
         var divCard = playerSelect.children
         divCard = Array.prototype.slice.call(divCard)
-        if (filterBy.toLowerCase() === "alphabetically".toLowerCase())
+        if ((filterBy.toLowerCase() === "alphabetically".toLowerCase()) || (filterBy.toLowerCase() === "sortby"))
             divCard.sort(function(a, b) {
                 if (a.textContent < b.textContent)
                     return -1;

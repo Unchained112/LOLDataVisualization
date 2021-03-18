@@ -1,4 +1,8 @@
-function RadarChart(id, data, options) {
+function hej(yo) {
+    console.log(yo)
+}
+
+function RadarChart(id, data, options, playerId) {
     var cfg = {
         w: 100,				//Width of the circle
         h: 100,				//Height of the circle
@@ -14,7 +18,7 @@ function RadarChart(id, data, options) {
         roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
         color: d3.scale.category10()	//Color function
     };
-    console.log(data)
+    console.log(options.color)
 
     //Put all of the options into a variable called cfg
     if ('undefined' !== typeof options) {
@@ -155,6 +159,7 @@ function RadarChart(id, data, options) {
         .style("fill-opacity", cfg.opacityArea)
         .on('mouseover', function (d, i) {
             //Dim all blobs
+            
             d3.selectAll(".radarArea")
                 .transition().duration(200)
                 .style("fill-opacity", 0.1);

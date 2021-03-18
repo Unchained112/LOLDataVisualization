@@ -4,7 +4,19 @@ var margin = {top: 90, right: 140, bottom: 20, left: 188},
     innerHeight = height - 2;
 
 var devicePixelRatio = window.devicePixelRatio || 1;
-var colorArray = ["#5DA5B3"]
+var colorArray = ["#B93849"]
+var colors = {
+  "Astralis": [185,56,73],
+  "Excel Esports": [37,50,75],
+  "FC Schalke 04 Esports": [325,50,39],
+  "Fnatic": [10,28,67],
+  "G2 Esports": [271,39,57],
+  "MAD Lions": [318,65,67],
+  "Misfits Gaming": [28,100,52],
+  "Rogue": [41,75,61],
+  "SK Gaming": [60,86,61],
+  "Team Vitality": [30,100,73]
+};
 var color = d3.scaleOrdinal()
   .range(colorArray);
 
@@ -343,10 +355,8 @@ d3.csv("player-stats.csv", function(error, data) {
   };
 
   function draw(d) {
-    //colorArray.push(getRandomColor())
-    // let newColor = getRandomColor(d.Player)
-    // d.color = newColor
-    ctx.strokeStyle = d.color; //getRandomColor(d.Player)
+    
+    ctx.strokeStyle = d.color;
     ctx.beginPath();
     var coords = project(d);
     coords.forEach(function(p,i) {

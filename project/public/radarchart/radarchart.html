@@ -48,12 +48,12 @@
     
     <div class="pageContent">
         <header id="header">
-            <ul>
-              <li style="float: left;"><p class="ttlLogo">TopTeamsLeague</p></li>
+            <ul class="headerUl">
+                <li style="float: left;"><p class="ttlLogo" onclick="window.location='../index.html'">TopTeamsLeague</p></li>
               
-              <li><a href="../topTeamsLeagueChampion.html">Champions</a></li>
-              <li><a href="../topTeamsLeagueTeam.html">Teams</a></li>
-              <li class="header-dropdown">
+                <li><a href="../champAndTeam/topTeamsLeagueChampion.html">Champions</a></li>
+                <li><a href="../champAndTeam/topTeamsLeagueTeam.html">Teams</a></li>
+                <li class="header-dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Players</a>
                 <div class="header-dropdown-content">
                   <a href="radarchart.html">Radarchart</a>
@@ -73,13 +73,13 @@
                     <h6 id="resetButton" onclick="resetFilters()">Reset</h6>
                 </div>
                 <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="teamSelect" onchange="filterPlayers('team', this.value)">
-                    <option value="team" disabled selected hidden>Team</option>
+                    <option value="team" selected>Team</option>
                 </select>
                 <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="roleSelect" onchange="filterPlayers('role', this.value)">
-                    <option value="role" disabled selected hidden>Role</option>
+                    <option value="role" selected>Role</option>
                 </select>
                 <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="sortBySelect" onchange="filterPlayers('sortBy', this.value)">
-                    <option value="sortby" disabled selected hidden>Sort by</option>
+                    <option value="sortby" selected>Sort by</option>
                     <option value="alphabetically">Alphabetically</option>
                     <option value="Highest kill participation">Highest kill participation</option>
                     <option value="Most damage">Most damage</option>

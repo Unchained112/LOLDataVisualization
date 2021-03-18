@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Player stats</title>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.7/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
+    <!--
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <link href="aboutUsStyle.css" rel='stylesheet'>
+    <link rel="stylesheet" href="../header.css">
+    <script type="text/javascript" src="radarChart.js"></script>
+    <script type="text/javascript" src="teamRadarChart.js"></script>
+    <script type="text/javascript" src="visualization.js"></script>
+    <!-- <script type="text/javascript" src="teamBarChart.js"></script> -->
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/dist/echarts.min.js"></script> -->
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    
+    <div class="pageContent">
+        <header id="header">
+            <ul class="headerUl">
+                <li style="float: left;"><p class="ttlLogo" onclick="window.location='../index.html'">TopTeamsLeague</p></li>
+                
+                <li><a href="../champAndTeam/topTeamsLeagueChampion.html">Champions</a></li>
+                <li><a href="../champAndTeam/topTeamsLeagueTeam.html">Teams</a></li>
+                <li class="header-dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Players</a>
+                <div class="header-dropdown-content">
+                    <a href="radarchart.html">Radarchart</a>
+                    <a href="../player-scatter.html">Parallel coordinates</a>
+                </div>
+                </li>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+        </header>
+        <div>
+            <div class="card aboutUsCard col-sm-2">
+                <div class="imageCropper">
+                    <img class="card-img-top aboutUsImage" src="images/bosen.PNG" alt="Card image cap">
+                </div>
+                <div class="card-body pb-0">
+                    <h6 class="card-title">Bosen Cheng</h6>
+                    <ul class="infoUl">
+                        <li>UX</li>
+                        <li>Bossade</li>
+                        <li>Manager</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card aboutUsCard col-sm-4">
+                <div class="imageCropper">
+                    <img class="card-img-top aboutUsImage" src="images/elias1.PNG" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Elias Åkerlund</h6>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+            <div class="card aboutUsCard col-sm-4" >
+                <div class="imageCropper">
+                    <img class="card-img-top aboutUsImage" src="images/elias2.PNG" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Elias Alkvist Cetin</h6>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+            <div class="card aboutUsCard col-sm-4">
+                <div class="imageCropper">
+                    <img class="card-img-top aboutUsImage" src="images/ruina.PNG" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Ruina Wang</h6>
+                    <p class="card-text"><small> is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</small></p>
+                </div>
+            </div>
+            <div class="card aboutUsCard col-sm-4">
+                <div class="imageCropper">
+                    <img class="card-img-top aboutUsImage" src="images/yifei.PNG" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Yifei Wang</h6>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- <script type="text/javascript" src="echarts.js"></script> -->
+    <script type="text/javascript" src="radarChart.js"></script>
+    <script type="text/javascript" src="teamRadarChart.js"></script>
+    <script type="text/javascript" src="visualization.js"></script>
+    <!-- <script type="text/javascript" src="teamBarChart.js"></script> -->
+</body>
+</html>

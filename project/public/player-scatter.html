@@ -21,11 +21,11 @@
   <div class="pageWrapper">
     <div class="page">
       <header>
-        <ul>
-          <li style="float: left;"><p class="ttlLogo">TopTeamsLeague</p></li>
+        <ul class="headerUl">
+          <li style="float: left;"><p class="ttlLogo" onclick="window.location='index.html'">TopTeamsLeague</p></li>
           
-          <li><a href="./topTeamsLeagueChampion.html">Champions</a></li>
-          <li><a href="./topTeamsLeagueTeam.html">Teams</a></li>
+          <li><a href="champAndTeam/topTeamsLeagueChampion.html">Champions</a></li>
+          <li><a href="champAndTeam/topTeamsLeagueTeam.html">Teams</a></li>
           <li class="header-dropdown">
             <a href="javascript:void(0)" class="dropbtn">Players</a>
             <div class="header-dropdown-content">
@@ -39,34 +39,34 @@
     </div>
     <div class="tableDiv">
       
-      <table class="table table-striped table-bordered table-sm table-fixed"">
+      <table id="myTable"class="table table-striped table-bordered table-sm table-fixed">
         <thead>
           <tr>															
-            <th class="Player">Player</th>
-            <th class="Team">Team</th>
-            <th class="Pos">Position</th>
-            <th class="numberCol"><div class="yoyo">GP<span class="tooltiptext">Games played</span></div></th>
-            <th class="numberCol"><div class="yoyo">W%<span class="tooltiptext">Win rate</span></div></th>
-            <th class="numberCol"><div class="yoyo">CTR%<span class="tooltiptext">Counter-pick rate</span></div></th>
-            <th class="numberCol"><div class="yoyo">K<span class="tooltiptext">Total kills</span></div></th>
-            <th class="numberCol"><div class="yoyo">D<span class="tooltiptext">Total deats</span></div></th>
-            <th class="numberCol"><div class="yoyo">A<span class="tooltiptext">Total assists</span></div></th>
-            <th class="numberCol"><div class="yoyo">KDA<span class="tooltiptext">Total Kill/Death/Assist ratio</span></div></th>
-            <th class="numberCol"><div class="yoyo">KP%<span class="tooltiptext">Kill participation (%)</span></div></th>
-            <th class="numberCol"><div class="yoyo">KS%<span class="tooltiptext">Kill share (%)</span></div></th>
-            <th class="numberCol"><div class="yoyo">DTH%<span class="tooltiptext">Avg share of team deaths (%)</span></div></th>
-            <th class="numberCol"><div class="yoyo">FB%<span class="tooltiptext">First blood rate (%)</span></div></th>
-            <th class="numberCol"><div class="yoyo">GD10<span class="tooltiptext">Avg gold difference at 10 min</span></div></th>
-            <th class="numberCol"><div class="yoyo">XPD10<span class="tooltiptext">Avg xp difference at 10 min</span></div></th>
-            <th class="numberCol"><div class="yoyo">CSD10<span class="tooltiptext">Avg creep score difference at 10 min</span></div></th>
-            <th class="numberCol"><div class="yoyo">CSPM<span class="tooltiptext">Avg monsters + minions killed per min</span></div></th>
-            <th class="numberCol"><div class="yoyo">CS%P15<span class="tooltiptext">Avg share of team's total creep score after 15 min</span></div></th>
-            <th class="numberCol"><div class="yoyo">DPM<span class="tooltiptext">Avg damage to champions per min (%)</span></div></th>
-            <th class="numberCol"><div class="yoyo">DMG%<span class="tooltiptext">Damage share</span></div></th>
-            <th class="numberCol"><div class="yoyo">EGPM<span class="tooltiptext">Avg earned gold per min</span></div></th>
-            <th class="numberCol"><div class="yoyo">GOLD%<span class="tooltiptext">Gold share (%)</span></div></th>
-            <th class="numberCol"><div class="yoyo">WPM<span class="tooltiptext">Avg wards placed per min</span></div></th>
-            <th class="numberCol"><div class="yoyo">WCPM<span class="tooltiptext">Avg wards cleared per min</span></div></th>
+            <th onclick="sortTable(0)" class="Player">Player</th>
+            <th onclick="sortTable(1)" class="Team">Team</th>
+            <th onclick="sortTable(2)" class="Pos">Position</th>
+            <th onclick="sortTable(3)" class="numberCol"><div class="yoyo">GP<span class="tooltiptext">Games played</span></div></th>
+            <th onclick="sortTable(4)" class="numberCol"><div class="yoyo">W%<span class="tooltiptext">Win rate</span></div></th>
+            <th onclick="sortTable(5)" class="numberCol"><div class="yoyo">CTR%<span class="tooltiptext">Counter-pick rate</span></div></th>
+            <th onclick="sortTable(6)" class="numberCol"><div class="yoyo">K<span class="tooltiptext">Total kills</span></div></th>
+            <th onclick="sortTable(7)" class="numberCol"><div class="yoyo">D<span class="tooltiptext">Total deats</span></div></th>
+            <th onclick="sortTable(8)" class="numberCol"><div class="yoyo">A<span class="tooltiptext">Total assists</span></div></th>
+            <th onclick="sortTable(9)" class="numberCol"><div class="yoyo">KDA<span class="tooltiptext">Total Kill/Death/Assist ratio</span></div></th>
+            <th onclick="sortTable(10)" class="numberCol"><div class="yoyo">KP%<span class="tooltiptext">Kill participation (%)</span></div></th>
+            <th onclick="sortTable(11)" class="numberCol"><div class="yoyo">KS%<span class="tooltiptext">Kill share (%)</span></div></th>
+            <th onclick="sortTable(12)" class="numberCol"><div class="yoyo">DTH%<span class="tooltiptext">Avg share of team deaths (%)</span></div></th>
+            <th onclick="sortTable(13)" class="numberCol"><div class="yoyo">FB%<span class="tooltiptext">First blood rate (%)</span></div></th>
+            <th onclick="sortTable(14)" class="numberCol"><div class="yoyo">GD10<span class="tooltiptext">Avg gold difference at 10 min</span></div></th>
+            <th onclick="sortTable(15)" class="numberCol"><div class="yoyo">XPD10<span class="tooltiptext">Avg xp difference at 10 min</span></div></th>
+            <th onclick="sortTable(16)" class="numberCol"><div class="yoyo">CSD10<span class="tooltiptext">Avg creep score difference at 10 min</span></div></th>
+            <th onclick="sortTable(17)" class="numberCol"><div class="yoyo">CSPM<span class="tooltiptext">Avg monsters + minions killed per min</span></div></th>
+            <th onclick="sortTable(18)" class="numberCol"><div class="yoyo">CS%P15<span class="tooltiptext">Avg share of team's total creep score after 15 min</span></div></th>
+            <th onclick="sortTable(19)" class="numberCol"><div class="yoyo">DPM<span class="tooltiptext">Avg damage to champions per min (%)</span></div></th>
+            <th onclick="sortTable(21)" class="numberCol"><div class="yoyo">DMG%<span class="tooltiptext">Damage share</span></div></th>
+            <th onclick="sortTable(22)" class="numberCol"><div class="yoyo">EGPM<span class="tooltiptext">Avg earned gold per min</span></div></th>
+            <th onclick="sortTable(23)" class="numberCol"><div class="yoyo">GOLD%<span class="tooltiptext">Gold share (%)</span></div></th>
+            <th onclick="sortTable(24)" class="numberCol"><div class="yoyo">WPM<span class="tooltiptext">Avg wards placed per min</span></div></th>
+            <th onclick="sortTable(25)" class="numberCol"><div class="yoyo">WCPM<span class="tooltiptext">Avg wards cleared per min</span></div></th>
           </tr>
         </thead>
         <tbody id="tableBody">
@@ -107,5 +107,117 @@
   <script src="https://d3js.org/d3.v4.js"></script>
   <script src="https://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
   <script src="parcoords.js"></script>
+  <script>
+    function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    //Set the sorting direction to ascending:
+    
+    /*Make a loop that will continue until
+    no switching has been done:*/
+    if (n <= 2) {
+    dir = "asc"; 
+    while (switching) {
+      //start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /*Loop through all table rows (except the
+      first, which contains table headers):*/
+      for (i = 1; i < (rows.length - 1); i++) {
+        //start by saying there should be no switching:
+        shouldSwitch = false;
+        /*Get the two elements you want to compare,
+        one from current row and one from the next:*/
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        
+        /*check if the two rows should switch place,
+        based on the direction, asc or desc:*/
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch= true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        /*If a switch has been marked, make the switch
+        and mark that a switch has been done:*/
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        //Each time a switch is done, increase this count by 1:
+        switchcount ++;      
+      } else {
+        /*If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again.*/
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
+
+    else {
+      dir = "desc"; 
+      while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      //check if the two rows should switch place:
+      
+
+      if (dir == "asc") {
+          if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch= true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (Number(x.innerHTML) < Number(y.innerHTML)) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+
+      switchcount ++; 
+    }
+    else {
+        /*If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again.*/
+        if (switchcount == 0 && dir == "desc") {
+          dir = "asc";
+          switching = true;
+        }
+      }
+  }
+    }
+  }
+    </script>
+    
 </body>
 </html>

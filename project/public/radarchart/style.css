@@ -8,7 +8,6 @@
 
 .axis text {
   font: 10px sans-serif;
-  cursor: pointer;
 }
 
 .axis path,
@@ -86,7 +85,7 @@ body {
   grid-column: 3;
 }
 
-.playerName {
+.playerListName {
   cursor: pointer;
 }
 
