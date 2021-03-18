@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Champion Information Visualization</title>
+    <!-- Heading style -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="header.css">
+
+    <!-- Table Reference -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+    <!-- Map Reference -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+<body>
+<!-- CSS style for the header of our website -->
+<style>
+.bubbles {
+  stroke-width: 1px;
+  stroke: white;
+}
+.bubbles:hover {
+  stroke: black;
+}
+#my_dataviz {
+  /* display: inline-block; */
+  margin: 0 auto;
+  /* background-color: #ffffff; */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#champion_table thead{
+  background-color:rgb(223, 223, 223);
+}
+</style>
+<!-- Header -->
+<header>
+  <ul>
+    <li style="float: left;"><p class="ttlLogo">TopTeamsLeague</p></li>
+    
+    <li><a href="./topTeamsLeagueChampion.html">Champions</a></li>
+    <li><a href="./topTeamsLeagueTeam.html">Teams</a></li>
+    <li class="header-dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Players</a>
+      <div class="header-dropdown-content">
+        <a href="radarchart/radarchart.html">Radarchart</a>
+        <a href="player-scatter.html">Parallel coordinates</a>
+      </div>
+    </li>
+    <li><a href="index.html">Home</a></li>
+  </ul>
+</header>
+
+<!-- Head Tab -->
+<div class="w3-row">
+
+<!-- Map -->
+<div class="w3-half w3-white">
+  <header class="w3-container w3-light-gray"><h5>Map</h5></header>
+<div id="my_dataviz"></div>
+<div class="w3-container">
+  <h4><strong>What is this?</strong></h4>
+  <p>
+    The graph here shows the most strong and most popular champions on the Summoner's Rift. Specifically, we display three champions for each line with the highest win rate and three champions with the highest ban pick rate. Besides, we also show some game elements like the dragon with their influence on the win rate.
+  </p>
+</div>
+</div>
+
+<div class="w3-half w3-light-gray">
+  <header class="w3-container w3-blue-gray"><h5>Table</h5></header>
+<table id='champion_table' class="display">
+<thead><tr><th></th>
+<th>Champion</th>
+<th>Position</th>
+<th>Ban Pick Rate</th>
+<th>Win Rate</th>
+<th>KDA</th>
+<th>Gold</th>
+<th>CSPM</th>
+<th>DPM</th>
+</tr></thead>
+<tbody><tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Aatrox.png' height=50 width=50></img></td>
+<td>Aatrox</td>
+<td>Top</td>
+<td>33.0% </td>
+<td>83.0% </td>
+<td>7</td>
+<td>23.0% </td>
+<td>8.1</td>
+<td>500</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ahri.png' height=50 width=50></img></td>
+<td>Ahri</td>
+<td>Middle</td>
+<td>3.0% </td>
+<td>50.0% </td>
+<td>4.5</td>
+<td>26.0% </td>
+<td>9.3</td>
+<td>484</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Akali.png' height=50 width=50></img></td>
+<td>Akali</td>
+<td>Middle</td>
+<td>8.0% </td>
+<td>100.0% </td>
+<td>3.3</td>
+<td>17.0% </td>
+<td>7</td>
+<td>387</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Alistar.png' height=50 width=50></img></td>
+<td>Alistar</td>
+<td>Support</td>
+<td>67.0% </td>
+<td>37.0% </td>
+<td>2.2</td>
+<td>8.0% </td>
+<td>1</td>
+<td>153</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Aphelios.png' height=50 width=50></img></td>
+<td>Aphelios</td>
+<td>ADC</td>
+<td>17.0% </td>
+<td>40.0% </td>
+<td>3.5</td>
+<td>28.0% </td>
+<td>9.6</td>
+<td>474</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ashe.png' height=50 width=50></img></td>
+<td>Ashe</td>
+<td>ADC</td>
+<td>11.0% </td>
+<td>67.0% </td>
+<td>3.7</td>
+<td>23.0% </td>
+<td>8.7</td>
+<td>492</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Azir.png' height=50 width=50></img></td>
+<td>Azir</td>
+<td>Middle</td>
+<td>56.0% </td>
+<td>56.0% </td>
+<td>3.2</td>
+<td>25.0% </td>
+<td>9.3</td>
+<td>488</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Bard.png' height=50 width=50></img></td>
+<td>Bard</td>
+<td>Support</td>
+<td>1.0% </td>
+<td>0.0% </td>
+<td>1</td>
+<td>8.0% </td>
+<td>1.3</td>
+<td>223</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Blitzcrank.png' height=50 width=50></img></td>
+<td>Blitzcrank</td>
+<td>Support</td>
+<td>7.0% </td>
+<td>100.0% </td>
+<td>3</td>
+<td>8.0% </td>
+<td>0.9</td>
+<td>103</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Braum.png' height=50 width=50></img></td>
+<td>Braum</td>
+<td>Support</td>
+<td>8.0% </td>
+<td>25.0% </td>
+<td>3.3</td>
+<td>9.0% </td>
+<td>1.1</td>
+<td>202</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Caitlyn.png' height=50 width=50></img></td>
+<td>Caitlyn</td>
+<td>ADC</td>
+<td>16.0% </td>
+<td>20.0% </td>
+<td>3.7</td>
+<td>28.0% </td>
+<td>9.5</td>
+<td>561</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Camille.png' height=50 width=50></img></td>
+<td>Camille</td>
+<td>Top</td>
+<td>48.0% </td>
+<td>33.0% </td>
+<td>1.7</td>
+<td>23.0% </td>
+<td>7.8</td>
+<td>402</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Chogath.png' height=50 width=50></img></td>
+<td>Cho'Gath</td>
+<td>Top</td>
+<td>5.0% </td>
+<td>100.0% </td>
+<td>4</td>
+<td>19.0% </td>
+<td>6.9</td>
+<td>363</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Corki.png' height=50 width=50></img></td>
+<td>Corki</td>
+<td>Middle</td>
+<td>9.0% </td>
+<td>25.0% </td>
+<td>2.2</td>
+<td>28.0% </td>
+<td>9.7</td>
+<td>608</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/DrMundo.png' height=50 width=50></img></td>
+<td>Dr. Mundo</td>
+<td>Jungle</td>
+<td>3.0% </td>
+<td>0.0% </td>
+<td>1.6</td>
+<td>21.0% </td>
+<td>6</td>
+<td>302</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ekko.png' height=50 width=50></img></td>
+<td>Ekko</td>
+<td>Jungle</td>
+<td>8.0% </td>
+<td>0.0% </td>
+<td>2.5</td>
+<td>21.0% </td>
+<td>6.6</td>
+<td>248</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ekko.png' height=50 width=50></img></td>
+<td>Ekko</td>
+<td>Middle</td>
+<td>8.0% </td>
+<td>100.0% </td>
+<td>5.9</td>
+<td>21.0% </td>
+<td>8.5</td>
+<td>486</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Evelynn.png' height=50 width=50></img></td>
+<td>Evelynn</td>
+<td>Jungle</td>
+<td>1.0% </td>
+<td>0.0% </td>
+<td>1.8</td>
+<td>19.0% </td>
+<td>5.5</td>
+<td>442</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ezreal.png' height=50 width=50></img></td>
+<td>Ezreal</td>
+<td>ADC</td>
+<td>9.0% </td>
+<td>33.0% </td>
+<td>2.9</td>
+<td>25.0% </td>
+<td>8.9</td>
+<td>626</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Fiora.png' height=50 width=50></img></td>
+<td>Fiora</td>
+<td>Top</td>
+<td>1.0% </td>
+<td>100.0% </td>
+<td>4</td>
+<td>25.0% </td>
+<td>8.3</td>
+<td>513</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Galio.png' height=50 width=50></img></td>
+<td>Galio</td>
+<td>Middle</td>
+<td>13.0% </td>
+<td>0.0% </td>
+<td>1.3</td>
+<td>17.0% </td>
+<td>6.6</td>
+<td>489</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Galio.png' height=50 width=50></img></td>
+<td>Galio</td>
+<td>Support</td>
+<td>13.0% </td>
+<td>33.0% </td>
+<td>2.2</td>
+<td>9.0% </td>
+<td>1.3</td>
+<td>173</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Gangplank.png' height=50 width=50></img></td>
+<td>Gangplank</td>
+<td>Top</td>
+<td>20.0% </td>
+<td>75.0% </td>
+<td>3.9</td>
+<td>26.0% </td>
+<td>8.9</td>
+<td>628</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Gnar.png' height=50 width=50></img></td>
+<td>Gnar</td>
+<td>Top</td>
+<td>44.0% </td>
+<td>33.0% </td>
+<td>3</td>
+<td>22.0% </td>
+<td>8</td>
+<td>469</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Gragas.png' height=50 width=50></img></td>
+<td>Gragas</td>
+<td>Jungle</td>
+<td>63.0% </td>
+<td>0.0% </td>
+<td>0.7</td>
+<td>16.0% </td>
+<td>5.7</td>
+<td>253</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Gragas.png' height=50 width=50></img></td>
+<td>Gragas</td>
+<td>Support</td>
+<td>63.0% </td>
+<td>25.0% </td>
+<td>1.8</td>
+<td>10.0% </td>
+<td>2.2</td>
+<td>231</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Gragas.png' height=50 width=50></img></td>
+<td>Gragas</td>
+<td>Top</td>
+<td>63.0% </td>
+<td>48.0% </td>
+<td>3.7</td>
+<td>19.0% </td>
+<td>6.9</td>
+<td>381</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Graves.png' height=50 width=50></img></td>
+<td>Graves</td>
+<td>Jungle</td>
+<td>44.0% </td>
+<td>50.0% </td>
+<td>3.9</td>
+<td>23.0% </td>
+<td>7.2</td>
+<td>407</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Hecarim.png' height=50 width=50></img></td>
+<td>Hecarim</td>
+<td>Jungle</td>
+<td>29.0% </td>
+<td>44.0% </td>
+<td>3.2</td>
+<td>18.0% </td>
+<td>5.7</td>
+<td>256</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Irelia.png' height=50 width=50></img></td>
+<td>Irelia</td>
+<td>Middle</td>
+<td>4.0% </td>
+<td>0.0% </td>
+<td>2.2</td>
+<td>24.0% </td>
+<td>8</td>
+<td>480</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Irelia.png' height=50 width=50></img></td>
+<td>Irelia</td>
+<td>Top</td>
+<td>4.0% </td>
+<td>50.0% </td>
+<td>3.4</td>
+<td>22.0% </td>
+<td>8.8</td>
+<td>322</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ivern.png' height=50 width=50></img></td>
+<td>Ivern</td>
+<td>Jungle</td>
+<td>4.0% </td>
+<td>100.0% </td>
+<td>9</td>
+<td>15.0% </td>
+<td>5.7</td>
+<td>76</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ivern.png' height=50 width=50></img></td>
+<td>Ivern</td>
+<td>Top</td>
+<td>4.0% </td>
+<td>50.0% </td>
+<td>3</td>
+<td>18.0% </td>
+<td>6.5</td>
+<td>281</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/JarvanIV.png' height=50 width=50></img></td>
+<td>Jarvan IV</td>
+<td>Jungle</td>
+<td>15.0% </td>
+<td>57.0% </td>
+<td>3.2</td>
+<td>16.0% </td>
+<td>4.9</td>
+<td>189</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/JarvanIV.png' height=50 width=50></img></td>
+<td>Jarvan IV</td>
+<td>Support</td>
+<td>15.0% </td>
+<td>67.0% </td>
+<td>2.2</td>
+<td>10.0% </td>
+<td>0.7</td>
+<td>231</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Jax.png' height=50 width=50></img></td>
+<td>Jax</td>
+<td>Top</td>
+<td>5.0% </td>
+<td>0.0% </td>
+<td>0.8</td>
+<td>24.0% </td>
+<td>7.8</td>
+<td>404</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Jayce.png' height=50 width=50></img></td>
+<td>Jayce</td>
+<td>Middle</td>
+<td>16.0% </td>
+<td>0.0% </td>
+<td>3</td>
+<td>24.0% </td>
+<td>9.6</td>
+<td>417</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Jayce.png' height=50 width=50></img></td>
+<td>Jayce</td>
+<td>Top</td>
+<td>16.0% </td>
+<td>75.0% </td>
+<td>7</td>
+<td>24.0% </td>
+<td>8.9</td>
+<td>693</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Jhin.png' height=50 width=50></img></td>
+<td>Jhin</td>
+<td>ADC</td>
+<td>24.0% </td>
+<td>67.0% </td>
+<td>7.7</td>
+<td>26.0% </td>
+<td>9.5</td>
+<td>501</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Jinx.png' height=50 width=50></img></td>
+<td>Jinx</td>
+<td>ADC</td>
+<td>1.0% </td>
+<td>0.0% </td>
+<td>3.5</td>
+<td>32.0% </td>
+<td>10.8</td>
+<td>463</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Kaisa.png' height=50 width=50></img></td>
+<td>Kai'Sa</td>
+<td>ADC</td>
+<td>87.0% </td>
+<td>49.0% </td>
+<td>4.1</td>
+<td>27.0% </td>
+<td>9.5</td>
+<td>473</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Kalista.png' height=50 width=50></img></td>
+<td>Kalista</td>
+<td>ADC</td>
+<td>43.0% </td>
+<td>50.0% </td>
+<td>3</td>
+<td>26.0% </td>
+<td>8.9</td>
+<td>342</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Karma.png' height=50 width=50></img></td>
+<td>Karma</td>
+<td>Support</td>
+<td>3.0% </td>
+<td>100.0% </td>
+<td>10</td>
+<td>11.0% </td>
+<td>0.8</td>
+<td>282</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Karma.png' height=50 width=50></img></td>
+<td>Karma</td>
+<td>Top</td>
+<td>3.0% </td>
+<td>100.0% </td>
+<td>9</td>
+<td>19.0% </td>
+<td>7</td>
+<td>643</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Kayn.png' height=50 width=50></img></td>
+<td>Kayn</td>
+<td>Jungle</td>
+<td>3.0% </td>
+<td>100.0% </td>
+<td>5.7</td>
+<td>25.0% </td>
+<td>7.6</td>
+<td>561</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Kennen.png' height=50 width=50></img></td>
+<td>Kennen</td>
+<td>Top</td>
+<td>5.0% </td>
+<td>67.0% </td>
+<td>2.7</td>
+<td>19.0% </td>
+<td>7.4</td>
+<td>345</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Kindred.png' height=50 width=50></img></td>
+<td>Kindred</td>
+<td>Jungle</td>
+<td>1.0% </td>
+<td>0.0% </td>
+<td>0.8</td>
+<td>25.0% </td>
+<td>6.3</td>
+<td>324</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Kled.png' height=50 width=50></img></td>
+<td>Kled</td>
+<td>Top</td>
+<td>1.0% </td>
+<td>0.0% </td>
+<td>3</td>
+<td>19.0% </td>
+<td>8.4</td>
+<td>304</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Leblanc.png' height=50 width=50></img></td>
+<td>LeBlanc</td>
+<td>Middle</td>
+<td>5.0% </td>
+<td>0.0% </td>
+<td>3.3</td>
+<td>23.0% </td>
+<td>7.8</td>
+<td>550</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Leona.png' height=50 width=50></img></td>
+<td>Leona</td>
+<td>Support</td>
+<td>35.0% </td>
+<td>42.0% </td>
+<td>2.2</td>
+<td>9.0% </td>
+<td>1.2</td>
+<td>131</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Lillia.png' height=50 width=50></img></td>
+<td>Lillia</td>
+<td>Jungle</td>
+<td>71.0% </td>
+<td>42.0% </td>
+<td>3</td>
+<td>19.0% </td>
+<td>6.2</td>
+<td>340</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Lucian.png' height=50 width=50></img></td>
+<td>Lucian</td>
+<td>Middle</td>
+<td>36.0% </td>
+<td>58.0% </td>
+<td>3.9</td>
+<td>26.0% </td>
+<td>9.7</td>
+<td>497</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Lulu.png' height=50 width=50></img></td>
+<td>Lulu</td>
+<td>Support</td>
+<td>4.0% </td>
+<td>0.0% </td>
+<td>1.2</td>
+<td>10.0% </td>
+<td>0.7</td>
+<td>244</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Lulu.png' height=50 width=50></img></td>
+<td>Lulu</td>
+<td>Top</td>
+<td>4.0% </td>
+<td>100.0% </td>
+<td>6</td>
+<td>15.0% </td>
+<td>5.4</td>
+<td>266</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Lux.png' height=50 width=50></img></td>
+<td>Lux</td>
+<td>Support</td>
+<td>4.0% </td>
+<td>100.0% </td>
+<td>2.8</td>
+<td>9.0% </td>
+<td>0.7</td>
+<td>207</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Malphite.png' height=50 width=50></img></td>
+<td>Malphite</td>
+<td>Top</td>
+<td>7.0% </td>
+<td>0.0% </td>
+<td>6</td>
+<td>23.0% </td>
+<td>7.1</td>
+<td>419</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/MissFortune.png' height=50 width=50></img></td>
+<td>Miss Fortune</td>
+<td>ADC</td>
+<td>12.0% </td>
+<td>0.0% </td>
+<td>2.8</td>
+<td>26.0% </td>
+<td>9.2</td>
+<td>407</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Morgana.png' height=50 width=50></img></td>
+<td>Morgana</td>
+<td>Support</td>
+<td>5.0% </td>
+<td>0.0% </td>
+<td>1.7</td>
+<td>9.0% </td>
+<td>0.5</td>
+<td>171</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Nautilus.png' height=50 width=50></img></td>
+<td>Nautilus</td>
+<td>Support</td>
+<td>17.0% </td>
+<td>50.0% </td>
+<td>2</td>
+<td>9.0% </td>
+<td>1</td>
+<td>156</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Nidalee.png' height=50 width=50></img></td>
+<td>Nidalee</td>
+<td>Jungle</td>
+<td>24.0% </td>
+<td>57.0% </td>
+<td>4.1</td>
+<td>19.0% </td>
+<td>6.4</td>
+<td>362</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Olaf.png' height=50 width=50></img></td>
+<td>Olaf</td>
+<td>Jungle</td>
+<td>65.0% </td>
+<td>59.0% </td>
+<td>3.7</td>
+<td>19.0% </td>
+<td>6</td>
+<td>421</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Orianna.png' height=50 width=50></img></td>
+<td>Orianna</td>
+<td>Middle</td>
+<td>48.0% </td>
+<td>50.0% </td>
+<td>4.3</td>
+<td>24.0% </td>
+<td>9.1</td>
+<td>481</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ornn.png' height=50 width=50></img></td>
+<td>Ornn</td>
+<td>Top</td>
+<td>7.0% </td>
+<td>60.0% </td>
+<td>2.8</td>
+<td>19.0% </td>
+<td>7.3</td>
+<td>317</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Pantheon.png' height=50 width=50></img></td>
+<td>Pantheon</td>
+<td>Jungle</td>
+<td>47.0% </td>
+<td>50.0% </td>
+<td>3.7</td>
+<td>19.0% </td>
+<td>5.9</td>
+<td>373</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Pantheon.png' height=50 width=50></img></td>
+<td>Pantheon</td>
+<td>Top</td>
+<td>47.0% </td>
+<td>50.0% </td>
+<td>3.6</td>
+<td>20.0% </td>
+<td>7</td>
+<td>554</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Quinn.png' height=50 width=50></img></td>
+<td>Quinn</td>
+<td>Top</td>
+<td>3.0% </td>
+<td>100.0% </td>
+<td>3.8</td>
+<td>24.0% </td>
+<td>9</td>
+<td>772</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Rakan.png' height=50 width=50></img></td>
+<td>Rakan</td>
+<td>Support</td>
+<td>21.0% </td>
+<td>56.0% </td>
+<td>3.5</td>
+<td>9.0% </td>
+<td>1.2</td>
+<td>149</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Rell.png' height=50 width=50></img></td>
+<td>Rell</td>
+<td>Support</td>
+<td>73.0% </td>
+<td>70.0% </td>
+<td>3.1</td>
+<td>9.0% </td>
+<td>1.1</td>
+<td>148</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Renekton.png' height=50 width=50></img></td>
+<td>Renekton</td>
+<td>Top</td>
+<td>79.0% </td>
+<td>46.0% </td>
+<td>2.7</td>
+<td>22.0% </td>
+<td>8.2</td>
+<td>351</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Riven.png' height=50 width=50></img></td>
+<td>Riven</td>
+<td>Top</td>
+<td>1.0% </td>
+<td>100.0% </td>
+<td>20</td>
+<td>29.0% </td>
+<td>9.1</td>
+<td>680</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Ryze.png' height=50 width=50></img></td>
+<td>Ryze</td>
+<td>Middle</td>
+<td>21.0% </td>
+<td>70.0% </td>
+<td>3.1</td>
+<td>26.0% </td>
+<td>9.9</td>
+<td>532</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Samira.png' height=50 width=50></img></td>
+<td>Samira</td>
+<td>ADC</td>
+<td>23.0% </td>
+<td>40.0% </td>
+<td>3.4</td>
+<td>26.0% </td>
+<td>8.1</td>
+<td>444</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Senna.png' height=50 width=50></img></td>
+<td>Senna</td>
+<td>ADC</td>
+<td>44.0% </td>
+<td>60.0% </td>
+<td>6.3</td>
+<td>20.0% </td>
+<td>3.6</td>
+<td>636</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Seraphine.png' height=50 width=50></img></td>
+<td>Seraphine</td>
+<td>ADC</td>
+<td>36.0% </td>
+<td>100.0% </td>
+<td>10</td>
+<td>18.0% </td>
+<td>6.8</td>
+<td>339</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Seraphine.png' height=50 width=50></img></td>
+<td>Seraphine</td>
+<td>Middle</td>
+<td>36.0% </td>
+<td>75.0% </td>
+<td>11.8</td>
+<td>19.0% </td>
+<td>7</td>
+<td>260</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Seraphine.png' height=50 width=50></img></td>
+<td>Seraphine</td>
+<td>Support</td>
+<td>36.0% </td>
+<td>50.0% </td>
+<td>2.4</td>
+<td>9.0% </td>
+<td>0.7</td>
+<td>169</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Sett.png' height=50 width=50></img></td>
+<td>Sett</td>
+<td>Support</td>
+<td>11.0% </td>
+<td>67.0% </td>
+<td>1.2</td>
+<td>8.0% </td>
+<td>1.3</td>
+<td>147</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Sett.png' height=50 width=50></img></td>
+<td>Sett</td>
+<td>Top</td>
+<td>11.0% </td>
+<td>50.0% </td>
+<td>2</td>
+<td>20.0% </td>
+<td>7.5</td>
+<td>451</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Shen.png' height=50 width=50></img></td>
+<td>Shen</td>
+<td>Top</td>
+<td>8.0% </td>
+<td>40.0% </td>
+<td>6.4</td>
+<td>20.0% </td>
+<td>6.9</td>
+<td>282</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Sion.png' height=50 width=50></img></td>
+<td>Sion</td>
+<td>Support</td>
+<td>19.0% </td>
+<td>100.0% </td>
+<td>3.3</td>
+<td>16.0% </td>
+<td>6.1</td>
+<td>285</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Sion.png' height=50 width=50></img></td>
+<td>Sion</td>
+<td>Top</td>
+<td>19.0% </td>
+<td>27.0% </td>
+<td>2.3</td>
+<td>19.0% </td>
+<td>6.9</td>
+<td>350</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Sivir.png' height=50 width=50></img></td>
+<td>Sivir</td>
+<td>ADC</td>
+<td>4.0% </td>
+<td>100.0% </td>
+<td>28</td>
+<td>27.0% </td>
+<td>10.5</td>
+<td>593</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Skarner.png' height=50 width=50></img></td>
+<td>Skarner</td>
+<td>Jungle</td>
+<td>24.0% </td>
+<td>50.0% </td>
+<td>3.4</td>
+<td>15.0% </td>
+<td>4.7</td>
+<td>122</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Sylas.png' height=50 width=50></img></td>
+<td>Sylas</td>
+<td>Middle</td>
+<td>7.0% </td>
+<td>0.0% </td>
+<td>1.8</td>
+<td>25.0% </td>
+<td>8.7</td>
+<td>284</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Syndra.png' height=50 width=50></img></td>
+<td>Syndra</td>
+<td>Middle</td>
+<td>45.0% </td>
+<td>22.0% </td>
+<td>2</td>
+<td>24.0% </td>
+<td>8.5</td>
+<td>474</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/TahmKench.png' height=50 width=50></img></td>
+<td>Tahm Kench</td>
+<td>Support</td>
+<td>11.0% </td>
+<td>67.0% </td>
+<td>3.6</td>
+<td>15.0% </td>
+<td>5.1</td>
+<td>170</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Taliyah.png' height=50 width=50></img></td>
+<td>Taliyah</td>
+<td>Jungle</td>
+<td>49.0% </td>
+<td>88.0% </td>
+<td>5.7</td>
+<td>20.0% </td>
+<td>7</td>
+<td>446</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Thresh.png' height=50 width=50></img></td>
+<td>Thresh</td>
+<td>Support</td>
+<td>88.0% </td>
+<td>50.0% </td>
+<td>2.6</td>
+<td>9.0% </td>
+<td>1.1</td>
+<td>96</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Tristana.png' height=50 width=50></img></td>
+<td>Tristana</td>
+<td>ADC</td>
+<td>20.0% </td>
+<td>25.0% </td>
+<td>2.3</td>
+<td>25.0% </td>
+<td>8.5</td>
+<td>370</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Tristana.png' height=50 width=50></img></td>
+<td>Tristana</td>
+<td>Middle</td>
+<td>20.0% </td>
+<td>0.0% </td>
+<td>1.1</td>
+<td>27.0% </td>
+<td>8.5</td>
+<td>446</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/TwistedFate.png' height=50 width=50></img></td>
+<td>Twisted Fate</td>
+<td>Middle</td>
+<td>96.0% </td>
+<td>82.0% </td>
+<td>7.9</td>
+<td>24.0% </td>
+<td>8.2</td>
+<td>473</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Udyr.png' height=50 width=50></img></td>
+<td>Udyr</td>
+<td>Jungle</td>
+<td>72.0% </td>
+<td>46.0% </td>
+<td>3.5</td>
+<td>19.0% </td>
+<td>6.1</td>
+<td>184</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Vayne.png' height=50 width=50></img></td>
+<td>Vayne</td>
+<td>ADC</td>
+<td>11.0% </td>
+<td>60.0% </td>
+<td>4.5</td>
+<td>26.0% </td>
+<td>9</td>
+<td>369</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Viktor.png' height=50 width=50></img></td>
+<td>Viktor</td>
+<td>Middle</td>
+<td>15.0% </td>
+<td>33.0% </td>
+<td>2.2</td>
+<td>24.0% </td>
+<td>9.1</td>
+<td>589</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Vladimir.png' height=50 width=50></img></td>
+<td>Vladimir</td>
+<td>Top</td>
+<td>1.0% </td>
+<td>0.0% </td>
+<td>0.3</td>
+<td>19.0% </td>
+<td>7.3</td>
+<td>267</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Volibear.png' height=50 width=50></img></td>
+<td>Volibear</td>
+<td>Top</td>
+<td>11.0% </td>
+<td>60.0% </td>
+<td>2.6</td>
+<td>21.0% </td>
+<td>7.3</td>
+<td>403</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/MonkeyKing.png' height=50 width=50></img></td>
+<td>Wukong</td>
+<td>Top</td>
+<td>4.0% </td>
+<td>67.0% </td>
+<td>2</td>
+<td>22.0% </td>
+<td>6.6</td>
+<td>417</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Xayah.png' height=50 width=50></img></td>
+<td>Xayah</td>
+<td>ADC</td>
+<td>39.0% </td>
+<td>61.0% </td>
+<td>4</td>
+<td>28.0% </td>
+<td>9.6</td>
+<td>537</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Yone.png' height=50 width=50></img></td>
+<td>Yone</td>
+<td>Middle</td>
+<td>4.0% </td>
+<td>50.0% </td>
+<td>3.8</td>
+<td>27.0% </td>
+<td>9.3</td>
+<td>296</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Yone.png' height=50 width=50></img></td>
+<td>Yone</td>
+<td>Top</td>
+<td>4.0% </td>
+<td>0.0% </td>
+<td>0.5</td>
+<td>23.0% </td>
+<td>7.7</td>
+<td>404</td>
+</tr>
+<tr>
+<td><img src='http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/Zoe.png' height=50 width=50></img></td>
+<td>Zoe</td>
+<td>Middle</td>
+<td>29.0% </td>
+<td>50.0% </td>
+<td>4</td>
+<td>23.0% </td>
+<td>8.1</td>
+<td>510</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+<div class="w3-container">
+  <h4><strong>Definition</strong></h4>
+  <p>
+    <b>Ban Pick Rate: </b>Percentage of games in which the champion was either banned or picked in any role, which can represent the popularity of one champion.<br>
+    <b>KDA: </b>Total Kill/Death/Assist ratio, which can represent the overall strength of a champion. <br>
+    <b>Gold: </b>Gold Share: average share of team’s total gold earned (excludes starting gold and inherent gold generation), which can represent the champion's dependency of economy. <br>
+    <b>CSPM: </b>Average monsters and minions killed per minute, which represents the champion's ability to farm.<br>
+    <b>DPM: </b>Average damage to champions per minute, which can represent the champion's ability to cause damage.
+  </p>
+</div>
+
+<!-- Footer: Put our data source and reference here-->
+<footer class="w3-container" style="background-color:#396C90">
+  <h5 class="w3-text-sand">References</h5>
+  <ul class="w3-opacity w3-text-sand">
+    <li>Data Source: <a href="https://oracleselixir.com/stats/champions/byTournament/LEC%2F2021%20Season%2FSpring%20Season" target="_block">LEC 2021 Spring Champion Status </a></li>
+  </ul>  
+</footer>
+
+<script>
+    $(document).ready(function() {
+    $('#champion_table').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                if(column.selector.cols !== 2){
+                    return;
+                }
+                var select = $('<select><option value="">Position</option></select>')
+                    .appendTo( $(column.header()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+    } );
+</script>
+
+<script>
+class Champion{
+    constructor(Name, Pos, BanPick, Win){
+        this.Champion = Name;
+        this.Pos = Pos;
+        this.BanPick = BanPick;
+        this.Win = Win;
+    }
+    setX(x){
+        this.x = x;
+    }
+    setY(y){
+        this.y = y;
+    }
+    setR(r){
+        this.r =r;
+    }
+} 
+
+function threeLargest(champions){
+    var result = [];
+    var third = {Win:0};
+    var second = {Win:0};
+    var first = {Win:0};
+    champions.forEach(d=>{
+        if(d.Win > first.Win){
+            third = second;
+            second = first;
+            first = d;
+        }
+        else if(d.Win > second.Win){
+            third = second;
+            second = d;
+        }
+        else if(d.Win > third.Win){
+            third = d;
+        }
+    });
+    first.setR(0.8);
+    second.setR(0.7);
+    third.setR(0.6);
+    result.push(first);
+    result.push(second);
+    result.push(third);
+
+    third = {BanPick:0};
+    second = {BanPick:0};
+    first = {BanPick:0};
+    champions.forEach(d=>{
+        if(d.BanPick > first.BanPick){
+            third = second;
+            second = first;
+            first = d;
+        }
+        else if(d.BanPick > second.BanPick){
+            third = second;
+            second = d;
+        }
+        else if(d.BanPick > third.BanPick){
+            third = d;
+        }
+    });
+    first.setR(0.8);
+    second.setR(0.7);
+    third.setR(0.6);
+    result.push(first);
+    result.push(second);
+    result.push(third);
+
+    return result;
+}
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 20, bottom: 30, left: 50},
+    width = 700 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .style("background-image", "url(\"./assets/Summoner_Rift_Minimap3.jpg\")")
+  .style("background-size", "100%")
+  .append("svg")
+  .attr("viewBox", `20 20 700 700`)
+  .append("g")
+    .attr("transform",
+          "translate(" + 50 + "," + 25 + ")");
+
+//Read the data
+d3.csv("./assets/LECChampion.csv", function(data) {
+    var top = [];
+    var jungle = [];
+    var middle = [];
+    var support = [];
+    var adc = [];
+    data.forEach(d=>{
+        var e = new Champion(d['Champion'], d['Position'], d['Ban Pick Rate'], d['Win Rate']);
+        if (e.Pos == "Top"){
+            top.push(e);
+        }
+        if (e.Pos == "Middle"){
+            middle.push(e);
+        }
+        if (e.Pos == "Jungle"){
+            jungle.push(e);
+        }
+        if (e.Pos == "ADC"){
+            adc.push(e);
+        }
+        if (e.Pos == "Support"){
+            support.push(e);
+        }
+    });
+    var topData = threeLargest(top);
+    var jungleData = threeLargest(jungle);
+    var middleData = threeLargest(middle);
+    var supportData = threeLargest(support);
+    var adcData = threeLargest(adc);
+    var i;
+    for(i = 0; i<3; i++){
+        topData[i].setX(0.065);
+        topData[i].setY(topData[i].r);
+        jungleData[i].setX(0.4*jungleData[i].r);
+        jungleData[i].setY(0.8*jungleData[i].r);
+        middleData[i].setX(0.09*(i+5));
+        middleData[i].setY(0.08*(i+5));
+        supportData[i].setX(adcData[i].r+0.1);
+        supportData[i].setY(0.14*adcData[i].r);
+        adcData[i].setX(adcData[i].r+0.1);
+        adcData[i].setY(0.02);
+    }
+    for(i = 3; i<6; i++){
+        topData[i].setX(1 - 0.95*topData[i].r);
+        topData[i].setY(1.01);
+        jungleData[i].setX(0.1*(i+2));
+        jungleData[i].setY(1-0.24*jungleData[i].r);
+        middleData[i].setX(0.09*(i+4));
+        middleData[i].setY(0.08*(i+4));
+        supportData[i].setX(1.01);
+        supportData[i].setY(1 - 0.95*adcData[i].r);
+        adcData[i].setX(1.09);
+        adcData[i].setY(1 - 0.95*adcData[i].r);
+    }
+
+
+    newData = [...topData, ...jungleData, ...middleData, ...supportData, ...adcData];
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 1.1])
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .style("opacity",0);
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 1.1])
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y))
+    .style("opacity",0);
+
+  // Add a scale for bubble size
+  var z = d3.scaleLinear()
+    .domain([0, 1])
+    .range([ 4, 40]);
+
+  // Add a scale for bubble color
+//   var myColor = d3.scaleOrdinal()
+//     .domain(["Top", "ADC", "Middle", "Support", "Jungle"])
+//     .range(d3.schemeSet2);
+
+  // -1- Create a tooltip div that is hidden by default:
+  var tooltip = d3.select("#my_dataviz")
+    .append("div")
+    .attr("class", "svg-tooltip")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+    .style("width", "auto")
+    .style("font-size", "x-small")
+    .style("text-align", "left")
+      .attr("class", "tooltip")
+      .style("background-color", "black")
+      .style("border-radius", "5px")
+      .style("padding", "5px")
+      .style("color", "white")
+
+  var defs = svg.append("defs");
+
+  // Convert champion to match the image name
+  var convertName = function(d){
+      var name = d.Champion;
+      if(name == "Wukong"){
+        name = "MonkeyKing";
+      }
+      if(name == "Dr. Mundo"){
+        name = "DrMundo";
+      }
+      if(name == "Kai'Sa"){
+        name = "Kaisa";
+      }
+      if(name == "Cho'Gath"){
+        name = "Chogath";
+      }
+      if(name == "LeBlanc"){
+        name = "Leblanc";
+      }
+      name = name.replace(/ /g, "");
+      return name;
+    }
+
+    var dragon = {name:"Dragon",src:"dragon.png",content:"First dragon win rate: 64.18%", x:0.78, y:0.3, r:0.45};
+    var baron = {name:"Baron",src:"baron.png",content:"First baron win rate: 81.34%", x:0.37, y:0.78, r:0.45};
+    var turret = {name:"Turret",src:"tower.jpg",content:"First turret win rate: 72.19%", x:0.35, y:0.05, r:0.45};
+    var inhibitor = {name:"Inhibitor",src:"Inhibitor.png",content:"First inhibitor win rate: 90.76%", x:0.06, y:0.28, r:0.4};
+    var other = [];
+    other.push(dragon);
+    other.push(baron);
+    other.push(turret);
+    other.push(inhibitor);
+
+  // Add champion images to the circle
+  defs.selectAll(".champion-pattern")
+    .data(newData)
+    .enter().append("pattern")
+    .attr("class", "champion-pattern")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("id", convertName)
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", 1)
+    .attr("width", 1)
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", function(d){
+      var name = convertName(d);
+      return "http://ddragon.leagueoflegends.com/cdn/11.5.1/img/champion/" + name + ".png";
+    });
+
+    // Add other images to the circle
+    defs.selectAll(".other-pattern")
+        .data(other)
+        .enter().append("pattern")
+        .attr("class", "other-pattern")
+        .attr("height", "100%")
+        .attr("width", "100%")
+        .attr("id", function(d){return d.src;})
+        .attr("patternContentUnits", "objectBoundingBox")
+        .append("image")
+        .attr("height", 1)
+        .attr("width", 1)
+        .attr("preserveAspectRatio", "none")
+        .attr("xlink:href", function(d){return "./assets/" + d.src;});
+
+  // Add champion dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(newData)
+    .enter()
+    .append("circle")
+      .attr("class", "bubbles")
+      .attr("cx", function (d) {
+        return x(d.x);} )
+      .attr("cy", function (d) { 
+        return y(d.y);} )
+      .attr("r", function (d) { 
+        return z(0.6*d.r); } )
+      .style("fill", function(d){
+        name = convertName(d);
+        return "url(#" + name + ")"
+      } )
+    // -3- Trigger the functions
+    .on("mouseover", function(d){
+      tooltip.style("visibility", "visible").html(d.Champion + "<br>" + d.Pos + "<br> Win Rate: " + parseFloat(d.Win*100).toFixed(1) + "%<br> BP Rate: "+ parseFloat(d.BanPick*100).toFixed(1) + "%" );
+    })
+    .on("mousemove", function(d){
+        tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+    })
+    .on("mouseout", function(){
+      tooltip.style("visibility", "hidden");
+    });
+
+    // Add other dots
+    svg.append('g')
+    .selectAll("dot")
+    .data(other)
+    .enter()
+    .append("circle")
+      .attr("class", "bubbles")
+      .attr("cx", function (d) {
+        return x(d.x);} )
+      .attr("cy", function (d) { 
+        return y(d.y);} )
+      .attr("r", function (d) { 
+        return z(1.4*d.r); } )
+      .style("fill", function(d){
+        return "url(#" + d.src + ")";
+      } )
+    // -3- Trigger the functions
+    .on("mouseover", function(d){
+      tooltip.style("visibility", "visible").html(d.content);
+    })
+    .on("mousemove", function(d){
+        tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+    })
+    .on("mouseout", function(){
+      tooltip.style("visibility", "hidden");
+    })
+    
+  })
+</script>
+
+</body>
+</html>
