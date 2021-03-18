@@ -1330,13 +1330,12 @@ var margin = {top: 10, right: 20, bottom: 30, left: 50},
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .style("background-image", "url(\"./assets/Summoner_Rift_Minimap3.jpg\")")
-  .style("background-size", "700px 700px")
+  .style("background-size", "100%")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+  .attr("viewBox", `20 20 700 700`)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+          "translate(" + 50 + "," + 25 + ")");
 
 //Read the data
 d3.csv("./assets/LECChampion.csv", function(data) {
@@ -1532,7 +1531,7 @@ d3.csv("./assets/LECChampion.csv", function(data) {
     })
     .on("mouseout", function(){
       tooltip.style("visibility", "hidden");
-    })
+    });
 
     // Add other dots
     svg.append('g')
