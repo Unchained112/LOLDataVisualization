@@ -4,18 +4,18 @@ var margin = {top: 90, right: 140, bottom: 20, left: 188},
     innerHeight = height - 2;
 
 var devicePixelRatio = window.devicePixelRatio || 1;
-var colorArray = ["#B93849"]
+var colorArray = ["#9ddfe3"]
 var colors = {
-  "Astralis": [185,56,73],
-  "Excel Esports": [37,50,75],
-  "FC Schalke 04 Esports": [325,50,39],
-  "Fnatic": [10,28,67],
-  "G2 Esports": [271,39,57],
-  "MAD Lions": [318,65,67],
-  "Misfits Gaming": [28,100,52],
-  "Rogue": [41,75,61],
-  "SK Gaming": [60,86,61],
-  "Team Vitality": [30,100,73]
+  "Astralis": ["#9ddfe3"],
+  "Excel Esports": ["#e4ceb0"],
+  "FC Schalke 04 Esports": ["#a94f7f"],
+  "Fnatic": ["#cca9a3"],
+  "G2 Esports": ["#a67dc0"],
+  "MAD Lions": ["#ec87c6"],
+  "Misfits Gaming": ["#ff8e43"],
+  "Rogue": ["#ebc176"],
+  "SK Gaming": ["#f0f277"],
+  "Team Vitality": ["#ffc390"]
 };
 var color = d3.scaleOrdinal()
   .range(colorArray);
