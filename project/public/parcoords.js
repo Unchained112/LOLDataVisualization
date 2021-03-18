@@ -249,7 +249,7 @@ d3.csv("player-stats.csv", function(error, data) {
   // shuffle the data!
   data = d3.shuffle(data);
   data.forEach(function(d) {
-    d.color = getRandomColor()
+    d.color = colors[d.Team]
     dimensions.forEach(function(p) {
       d[p.key] = !d[p.key] ? null : p.type.coerce(d[p.key]);
     });
