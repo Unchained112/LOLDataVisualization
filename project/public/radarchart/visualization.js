@@ -97,7 +97,7 @@ function RadarChart(id, data, options, playerId) {
         .attr("dy", "0.4em")
         .style("font-size", "10px")
         .attr("fill", "#737373")
-        .text(function (d, i) { return Format(maxValue * d / cfg.levels); });
+        .text(function (d, i) { return Format(maxValue * d / cfg.levels) + "%"; });
 
     /////////////////////////////////////////////////////////
     //////////////////// Draw the axes //////////////////////
@@ -222,7 +222,7 @@ function RadarChart(id, data, options, playerId) {
             tooltip
                 .attr('x', newX)
                 .attr('y', newY)
-                .text(Format(d.value))
+                .text(Format(d.value) + "%")
                 .transition().duration(200)
                 .style('opacity', 1);
         })
