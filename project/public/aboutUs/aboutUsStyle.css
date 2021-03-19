@@ -25,7 +25,7 @@ body {
 .pageContent {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  grid-template-rows: 50px 50px calc(100vh - 100px);
+  grid-template-rows: 50px calc(60vh - 25px) calc(40vh - 25px);
 }
 .aboutUsImage {
   object-fit: scale-down;
@@ -38,6 +38,7 @@ body {
   display: flex;
   align-items: center;
   padding: 10px;
+  height: 270px;
 }
 
 .imageCropper {
@@ -51,4 +52,58 @@ body {
   list-style-type:none;
   text-align: center;
   padding: 0;
+}
+
+.members {
+  grid-row: 3;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.description {
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 100%;
+}
+
+.knownIssues {
+  max-height: 100%;
+  grid-column: 2;
+  grid-row-end: 2;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.ourProject {
+  grid-column: 1;
+}
+
+.knownIssuesContent {
+  text-align: left;
+  font-family: 'Courier New';
+  border-style: solid;
+  border-width: 1px;
+  border-color: silver;
+  border-radius: 10px;
+  flex: 1;
+  margin: 10px;
+  overflow: auto;
+}
+
+.updateDate {
+  background-color: black;
+  color: white;
+}
+
+.updateHeadline {
+  font-weight: bold;
+  text-align: center;
 }

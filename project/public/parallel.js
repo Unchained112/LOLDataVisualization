@@ -34,25 +34,6 @@ var colors = {
   "Rogue": [41,75,61],
   "SK Gaming": [60,86,61],
   "Team Vitality": [30,100,73]
-
-
-
-
-//   "Finfish and Shellfish Products": [318,65,67],
-//   "Fruits and Fruit Juices": [274,30,76],
-//   "Lamb, Veal, and Game Products": [20,49,49],
-//   "Legumes and Legume Products": [334,80,84],
-//   "Meals, Entrees, and Sidedishes": [185,80,45],
-//   "Nut and Seed Products": [10,30,42],
-//   "Pork Products": [339,60,49],
-//   "Poultry Products": [359,69,49],
-//   "Restaurant Foods": [204,70,41],
-//   "Sausages and Luncheon Meats": [1,100,79],
-//   "Snacks": [189,57,75],
-//   "Soups, Sauces, and Gravies": [110,57,70],
-//   "Spices and Herbs": [214,55,79],
-//   "Sweets": [339,60,75],
-//   "Vegetables and Vegetable Products": [120,56,40]
 };
 
 // Scale chart and canvas height

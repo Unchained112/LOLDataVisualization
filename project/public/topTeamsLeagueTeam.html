@@ -7,30 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="header.css">
+
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="parallel.css" />
+    <link rel="stylesheet" type="text/css" href="../header.css" />
   </head>
   <body>
 
+<style>
+.bubbles {
+  stroke-width: 1px;
+  stroke: white;
+}
+.bubbles:hover {
+  stroke: black;
+}
+#my_dataviz {
+  /* display: inline-block; */
+  margin: 0 auto;
+  /* background-color: #ffffff; */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+</style>
 
-<!-- Header -->
-<header>
-  <ul class="headerUl">
-    <li style="float: left;"><p class="ttlLogo" onclick="window.location='index.html'">TopTeamsLeague</p></li>
-    
-    <li><a href="./topTeamsLeagueChampion.html">Champions</a></li>
-    <li><a href="./topTeamsLeagueTeam.html">Teams</a></li>
-    <li class="header-dropdown">
-      <a href="javascript:void(0)" class="dropbtn">Players</a>
-      <div class="header-dropdown-content">
-        <a href="radarchart/radarchart.html">Radarchart</a>
-        <a href="player-scatter.html">Parallel coordinates</a>
-      </div>
-    </li>
-    <li><a href="index.html">Home</a></li>
-  </ul>
-</header>
+  <header>
+    <ul class="headerUl">
+      <li style="float: left;"><p class="ttlLogo" onclick="window.location='../index.html'">TopTeamsLeague</p></li>
+      
+      <li><a href="topTeamsLeagueChampion.html">Champions</a></li>
+      <li><a href="topTeamsLeagueTeam.html">Teams</a></li>
+      <li class="header-dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Players</a>
+        <div class="header-dropdown-content">
+          <a href="../radarchart/radarchart.html">Radarchart</a>
+          <a href="../player-scatter.html">Parallel coordinates</a>
+        </div>
+      </li>
+      <li><a href="../index.html">Home</a></li>
+    </ul>
+  </header>
 
     
   <div id="header" class="w3-container">
@@ -126,7 +145,7 @@
 
 </body>
 
-<script src='./d3.v2.js'></script>
-<script src="./underscore.js"></script>
+<script src="https://mbostock.github.com/d3/d3.v2.js"></script>
+<script src="http://underscorejs.org/underscore.js"></script>
 <script src="parallel.js"></script>
 </html>

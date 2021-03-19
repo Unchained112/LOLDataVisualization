@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/dist/echarts.min.js"></script> -->
-
+    <script src="https://kit.fontawesome.com/a3a5fa6634.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
@@ -66,49 +66,111 @@
                 <li><a href="../index.html">Home</a></li>
             </ul>
         </header>
-        <div>
-            <div class="card aboutUsCard col-sm-2">
+        <div class="description">
+            <div class="ourProject">
+                <h3 class="mt-3">Our project</h3>
+                <iframe height="170" src="https://www.youtube.com/embed/K4TOrB7at0Y">
+                </iframe>
+                <p class="p-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper efficitur magna, 
+                    quis condimentum justo consectetur ac. Mauris mollis, nulla a sagittis iaculis, dui 
+                    arcu suscipit tellus, ut egestas augue velit et sem. Fusce quis urna viverra, tincidunt 
+                    tortor vitae, lacinia nunc. Aliquam lacinia bibendum tellus, vitae malesuada felis. Aenean
+                     et vestibulum nibh. Vivamus urna massa, molestie in pulvinar a, ultrices eget sem. Nunc sed
+                      erat sit amet nunc eleifend suscipit. Curabitur vulputate iaculis erat sit amet posuere. 
+                      Maecenas id purus risus. Phasellus scelerisque, dui at tincidunt pulvinar, nisi leo 
+                      venenatis augue, non tempus arcu eros ac arcu. Nunc efficitur arcu vel ipsum aliquet, a 
+                      blandit nisl posuere. Sed auctor elit eu sollicitudin volutpat. Integer mollis, ante sed 
+                      fringilla porttitor, nulla nunc suscipit sapien, id tincidunt tellus orci nec metus.</p>
+            </div>
+            <div class="knownIssues">
+                <h3 class="mt-3">Update feed</h3>
+                <div class="knownIssuesContent p-3">
+                    <h6 class="updateHeadline">Update according to the feedback:</h6>
+                    <p class="updateDate"> - 2020/3/18:</p>
+                    <ul>
+                        <li>Add project team information</li>
+                        <li>Grammar issues are fixed on the home page</li>
+                        <li>Three cards on the home page are clickable now</li>
+                        <li>Click part is more clear in the radar chart</li>
+                        <li>In player information parallel coordinate, hover your mouse on table to view the name of the abbreviation</li>
+                        <li>In player information parallel coordinate, click the head of each column to sort it according to that data</li>
+                        <li>Champion map is now responsive for different window size</li>
+                        <li>More concrete description is added for Champion map</li>
+                        <li>Colours are now always the same for players in chart view (unless you reload page)</li>
+                        <li>Filters can now individually be reset</li>
+                    </ul>
+                    <h6 class="updateHeadline">Some developer comments:</h6>
+                    <p class="updateDate"> - 2020/3/18:</p>
+                    <ul>
+                        <li>Unfortunately some pages are mostly designed for (16:9) computer screens</li>
+                        <li>The hovering over player and highlighting chart is a lot more complicated than anticipated</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="members">
+
+            <!-- Bosen Cheng -->
+
+            <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/bosen.PNG" alt="Card image cap">
                 </div>
                 <div class="card-body pb-0">
                     <h6 class="card-title">Bosen Cheng</h6>
                     <ul class="infoUl">
-                        <li>UX Designer</li>
-                        <li>Project Manager</li>
-                        <li>Programmer</li>
+                        <li>Champion page</li>
+                        <li>Front/back end</li>
+                        <li>UX</li>
                     </ul>
+                    <p><a href="https://github.com/Unchained112"><i class="fa fa-github" style="font-size:20px"></i></a></p>
                 </div>
             </div>
+
+            <!-- Elias Åkerlund -->
+
             <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/elias1.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <h6 class="card-title">Elias Åkerlund</h6>
                     <ul class="infoUl">
-                        <li>Prime Programer</li>
-                        <li>UI Designer</li>
+                        <li>Player pages</li>
+                        <li>Front/back end</li>
+                        <li>UX</li>
                     </ul>
+                    <p>
+                        <a href="https://github.com/sejfz"><i class="fa fa-github" style="font-size:20px"></i></a>
+                        <a href="https://www.linkedin.com/in/elias-%C3%A5kerlund-ab23b4156/"><i class="fab fa-linkedin" style="font-size:20px"></i></a>
+                    </p>
                 </div>
             </div>
+
+            <!-- Elias Alkvist Cetin -->
+
             <div class="card aboutUsCard col-sm-4" >
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/elias2.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0 px-1">
                     <h6 class="card-title">Elias Alkvist Cetin</h6>
                     <ul class="infoUl">
-                        <li>Prime Programer</li>
-                        <li>UI Designer</li>
+                        <li>Player pages</li>
+                        <li>Front/back end</li>
+                        <li>Data analysis</li>
                     </ul>
+                    <p><a href="https://github.com/tjena1"><i class="fa fa-github" style="font-size:20px"></i></a></p>
                 </div>
             </div>
+
+            <!-- Ruina Wang -->
+
             <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/ruina.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <h6 class="card-title">Ruina Wang</h6>
                     <ul class="infoUl">
                         <li>Concept Designer</li>
@@ -116,11 +178,14 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Yifei Wang -->
+
             <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/yifei.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <h6 class="card-title">Yifei Wang</h6>
                     <ul class="infoUl">
                         <li>Programer</li>
