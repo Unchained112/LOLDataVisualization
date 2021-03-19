@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../header.css">
+    <link rel="stylesheet" href="header.css">
 
     <!-- Table Reference -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -21,7 +21,6 @@
 <body>
 <!-- CSS style for the header of our website -->
 <style>
-
 .bubbles {
   stroke-width: 1px;
   stroke: white;
@@ -40,21 +39,21 @@
   background-color:rgb(223, 223, 223);
 }
 </style>
-
+<!-- Header -->
 <header>
   <ul class="headerUl">
-    <li style="float: left;"><p class="ttlLogo" onclick="window.location='../index.html'">TopTeamsLeague</p></li>
-    
-    <li><a href="topTeamsLeagueChampion.html">Champions</a></li>
-    <li><a href="topTeamsLeagueTeam.html">Teams</a></li>
+    <li style="float: left;"><p class="ttlLogo" onclick="window.location='index.html'">TopTeamsLeague</p></li>
+    <li style="float: left;"><a href="aboutUs/aboutUs.html">About Us</a></li>
+    <li><a href="./topTeamsLeagueChampion.html">Champions</a></li>
+    <li><a href="./topTeamsLeagueTeam.html">Teams</a></li>
     <li class="header-dropdown">
       <a href="javascript:void(0)" class="dropbtn">Players</a>
       <div class="header-dropdown-content">
-        <a href="../radarchart/radarchart.html">Radarchart</a>
-        <a href="../player-scatter.html">Parallel coordinates</a>
+        <a href="radarchart/radarchart.html">Radarchart</a>
+        <a href="player-scatter.html">Parallel coordinates</a>
       </div>
     </li>
-    <li><a href="../index.html">Home</a></li>
+    <li><a href="index.html">Home</a></li>
   </ul>
 </header>
 
@@ -1333,13 +1332,12 @@ var margin = {top: 10, right: 20, bottom: 30, left: 50},
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .style("background-image", "url(\"./assets/Summoner_Rift_Minimap3.jpg\")")
-  .style("background-size", "700px 700px")
+  .style("background-size", "100%")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+  .attr("viewBox", `20 20 700 700`)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+          "translate(" + 50 + "," + 25 + ")");
 
 //Read the data
 d3.csv("./assets/LECChampion.csv", function(data) {
@@ -1535,7 +1533,7 @@ d3.csv("./assets/LECChampion.csv", function(data) {
     })
     .on("mouseout", function(){
       tooltip.style("visibility", "hidden");
-    })
+    });
 
     // Add other dots
     svg.append('g')
